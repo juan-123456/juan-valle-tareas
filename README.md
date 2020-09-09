@@ -3,12 +3,17 @@ Tareas del curso UTM
 
 1.- titulos de las lecciones de vimtutor  
 
-Lesson 1.1: MOVING THE CURSOR
-Lesson 1.2: EXITING VIM
-Lesson 1.3: TEXT EDITING - DELETION
-Lesson 1.4: TEXT EDITING - INSERTION
-Lesson 1.5: TEXT EDITING - APPENDING
-Lesson 1.5: EDITING A FILE
+Lesson 1.1! -MOVING THE CURSOR
+Lesson 1.2! -EXITING VIM
+Lesson 1.3! -TEXT EDITING - DELETION
+Lesson 1.4! -TEXT EDITING - INSERTION
+Lesson 1.5! -TEXT EDITING - APPENDING
+Lesson 1.5! -EDITING A FILE
+
+ Leccion 1!
+
+  - Import a HTML file and watch it magically convert to Markdown
+  - Drag and drop images (requires your Dropbox account be linked)
 
 Lesson 2.1: DELETION COMMANDS
 Lesson 2.2: MORE DELETION COMMANDS
