@@ -50,3 +50,7 @@ ipfs.add(result.ipfs, (err,hash)=> {
    console.log('https://ipfs.infura.io/ipfs/'+hash)
 })
 });
+
+----------}
+
+docker build -t ipfs:v1 .
