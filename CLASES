@@ -63,7 +63,12 @@ ipfs.add(result.ipfs, (err,hash)=> {
 });
 
 :::::::::::::::::::::::::::::::::::::::::::::::::
+
+construir contenedor
+
 docker build -t ipfs:v1 .
+lo corremos
+
 
 docker run --rm -it --name=ipfs ipfs:v1
 
@@ -83,6 +88,7 @@ git status
 
 
 :::::::::::::::::::::::::::::::::::::::::::::::::
+empieza 02
 
 Static Website
 
@@ -112,30 +118,43 @@ docker ps
 docker inspect <id>
 
 ::::::::::::::
+corrimos la imagen en mysql y creamos la base de datos
 
  docker run --name=test-mysql mysql
+ 
+ docker rm -f $(docker ps -aq) 
+
 
 docker run --detach --name=test-mysql --env="MYSQL_ROOT_PASSWORD=mypassword" mysql
 
-docker rm -f $(docker ps -aq) 
+luego para ver que se esta corriendo y compartida la base de datos
+
+docker ps
 
 ::::::::::::::
 
-Obtener la IP 
+Obtener la IP que nos asigna y acceder al contenedor
 
-
-docker inspect id | jq '.[].NetworkSettings.IPAddress'
+pero antes debes poner 
+docker ps
+y usar el id que nos da
+      
+                      ID
+docker inspect 4785309c105b | jq '.[].NetworkSettings.IPAddress'
 
 ::::::::::::::::::::::::::::::::::::::::::::::
-
+conectarnos a esa base de datos
 
 sudo apt-get install mysql-client
 
+debemos cambiar la ip que nos dieron pero debemos conectarnos a la base de datos primero aqui nos metera al mysql
 
 mysql -uroot -pmypassword -h 172.17.0.2 -P 3306
 
 
 ::::::::::::::::::::::::::::::::::::::::::::::
+
+empiza el 03
 
 CREAR BD MYSQL con mi config
 
@@ -153,7 +172,14 @@ COPY *.sh /docker-entrypoint-initdb.d/
 COPY *.sql /docker-entrypoint-initdb.d/
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+ahora igestamos datos
+ DE SEGUNDAS ESTO
+
 vim test.sh
+generamos la tabla de usuarios
+
+CON ESTO DE SEGUNDAS
 
 #!/bin/bash
 
@@ -166,7 +192,11 @@ echo "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::
 
+PRIMERO ESTO
+
 vim test.sql
+
+LUEGO ESTOO
 
 
 --
@@ -186,6 +216,7 @@ CREATE TABLE IF NOT EXISTS `user_details` (
 
 
 
+
 --
 -- Dumping data for table `user_details`
 --
@@ -202,10 +233,12 @@ INSERT INTO `user_details` (`user_id`, `username`, `first_name`, `last_name`, `g
 (9, 'brooks80', 'morgan', 'maria', 'Female', 'aa736a35dc15934d67c0a999dccff8f6', 1),
 (10, 'morgan65', 'paul', 'miller', 'Female', 'a28dca31f5aa5792e1cefd1dfd098569', 1);
 
-
+aqui agregamos el nombre para construir
 
 docker build -t utmdb:v1 .
-
+si queremos checar que imagenes tenemos
+docker images
+corremos la imagen
 docker run utmdb:v1 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::
