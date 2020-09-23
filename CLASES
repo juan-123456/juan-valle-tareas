@@ -1,65 +1,12 @@
+Dcokerizar imagen IPFS 
 
-Dia 17 de septiebre codigos
-
-https://runkit.com/5f63e259f0adf0001aab2b0e/5f6ab31ad14b7f001a5a1d50
-https://runkit.com/juan-123456/5f6ab39bbf8b400014736806
-
-const IPFS = require("ipfs-mini");
-const ipfs = new IPFS({host: 'ipfs.infura.io', port:5001, protocol:'https'});
-const data = "Data in the interplanetary file system IPFS";
-ipfs.add(data, (err,hash)=> {
-    if(err){
-    return console.log(err);
-    }
-    console.log('https://ipfs.infura.io/ipfs/'+hash)
-})
-Nos genera este codigo cuando ejercutamos este código de arriba
-https://ipfs.infura.io/ipfs/QmNNGntDAAdChxajoV1QRhV3DaRxCgQL2GSg6smGJjbgKa
-
-const prompt = require('prompt');
-const IPFS = require("ipfs-mini");
-const ipfs = new IPFS({host: 'ipfs.infura.io', port:5001, protocol:'https'});
-prompt.start();
-prompt.get(['ipfs'], function (err, result) {
-console.log('Command-line input received:');
-console.log('  IPS: ' + result.ipfs);
-
-
-ipfs.add(result.ipfs, (err,hash)=> {
-   if(err){
-   return console.log(err);
-   }
-   console.log('https://ipfs.infura.io/ipfs/'+hash)
-})
-});
-Lo que hacemos es una constante en ibpf le agregamos un dato para que me genere un  hash y pueda acceder a esa informacion
+mkdir -p clase17-sept-2020/01
+cd clase17-sept-2020/01
+ touch package.json Dockerfile index.js 
  
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+package.json 
 
-
-Construir imagen 1 parte
-Nos vamos a la terminal
-Creamos un vi index.js y pegamos
-const prompt = require('prompt');
-const IPFS = require("ipfs-mini");
-const ipfs = new IPFS({host: 'ipfs.infura.io', port:5001, protocol:'https'});
-prompt.start();
-prompt.get(['ipfs'], function (err, result) {
-console.log('Command-line input received:');
-console.log('  IPS: ' + result.ipfs);
-
-
-ipfs.add(result.ipfs, (err,hash)=> {
-   if(err){
-   return console.log(err);
-   }
-   console.log('https://ipfs.infura.io/ipfs/'+hash)
-})
-});
-
-Luego cat index para ver
-Luego touch package.json Dockerfile
- 
-Luego vi package,json y pegamos
 {
  "name": "ipfs",
  "version": "1.0.0",
@@ -82,25 +29,300 @@ Luego vi package,json y pegamos
    "prompt": "^1.0.0"
  }
 }
-Luego vi Docker file y pegamos
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Dockerfile 
+
 FROM node:10.15.0
 WORKDIR /usr/src/app
 COPY package*.json ./
 RUN npm install
 COPY . .
 CMD [ "npm", "start" ]
-Estamos jalando la imagen e importamos package 
-Tendríamos esto ahora
- 
- 
-Ya construimos 
-Ahora corremos
-1 contruimos imagen 
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+index,js
+
+const prompt = require('prompt');
+const IPFS = require("ipfs-mini");
+const ipfs = new IPFS({host: 'ipfs.infura.io', port:5001, protocol:'https'});
+prompt.start();
+prompt.get(['ipfs'], function (err, result) {
+console.log('Command-line input received:');
+console.log('  IPS: ' + result.ipfs);
+
+
+ipfs.add(result.ipfs, (err,hash)=> {
+   if(err){
+   return console.log(err);
+   }
+   console.log('https://ipfs.infura.io/ipfs/'+hash)
+})
+});
+
+:::::::::::::::::::::::::::::::::::::::::::::::::
 docker build -t ipfs:v1 .
-luego probar nuestra imagen
+
 docker run --rm -it --name=ipfs ipfs:v1
-aparece el link
-y a si creamos nuestra primera imagen
+
+
+:::::::::::::::::::::::::::::::::::::::::::::::::
+
+GIT cheatcheet
+
+git add . 
+
+git commit -m "aqui va el mensaje" 
+
+git push origin master 
+
+
+git status 
+
+
+:::::::::::::::::::::::::::::::::::::::::::::::::
+
+Static Website
+
+vi Dockerfile
+
+FROM nginx:alpine
+COPY . /usr/share/nginx/html
+
+vi index.html
+<p>hola mundo</p>
+
+
+docker build -t staticweb:v1 . 
+
+
+docker run -it --name=static staticweb:v1
+
+
+docker run -it -p 8080:80 --name=static staticweb:v1
+
+
+http://localhost:8080/
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::.
+docker ps 
+docker inspect <id>
+
+::::::::::::::
+
+ docker run --name=test-mysql mysql
+
+docker run --detach --name=test-mysql --env="MYSQL_ROOT_PASSWORD=mypassword" mysql
+
+docker rm -f $(docker ps -aq) 
+
+::::::::::::::
+
+Obtener la IP 
+
+
+docker inspect id | jq '.[].NetworkSettings.IPAddress'
+
+::::::::::::::::::::::::::::::::::::::::::::::
+
+
+sudo apt-get install mysql-client
+
+
+mysql -uroot -pmypassword -h 172.17.0.2 -P 3306
+
+
+::::::::::::::::::::::::::::::::::::::::::::::
+
+CREAR BD MYSQL con mi config
+
+vim Dockerfile
+
+FROM mysql:latest
+
+ENV MYSQL_ROOT_PASSWORD=rootpwd
+ENV MYSQL_DATABASE=db_name
+ENV MYSQL_USER=db_username
+ENV MYSQL_PASSWORD=db_pw
+
+
+COPY *.sh /docker-entrypoint-initdb.d/
+COPY *.sql /docker-entrypoint-initdb.d/
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::
+vim test.sh
+
+#!/bin/bash
+
+echo "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+echo "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+echo "                          UTM DB                                "
+echo "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+echo "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+vim test.sql
+
+
+--
+-- Table structure for table `user_details`
+--
+
+CREATE TABLE IF NOT EXISTS `user_details` (
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) DEFAULT NULL,
+  `first_name` varchar(50) DEFAULT NULL,
+  `last_name` varchar(50) DEFAULT NULL,
+  `gender` varchar(10) DEFAULT NULL,
+  `password` varchar(50) DEFAULT NULL,
+  `status` tinyint(10) DEFAULT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10001 ;
+
+
+
+--
+-- Dumping data for table `user_details`
+--
+
+INSERT INTO `user_details` (`user_id`, `username`, `first_name`, `last_name`, `gender`, `password`, `status`) VALUES
+(1, 'rogers63', 'david', 'john', 'Female', 'e6a33eee180b07e563d74fee8c2c66b8', 1),
+(2, 'mike28', 'rogers', 'paul', 'Male', '2e7dc6b8a1598f4f75c3eaa47958ee2f', 1),
+(3, 'rivera92', 'david', 'john', 'Male', '1c3a8e03f448d211904161a6f5849b68', 1),
+(4, 'ross95', 'maria', 'sanders', 'Male', '62f0a68a4179c5cdd997189760cbcf18', 1),
+(5, 'paul85', 'morris', 'miller', 'Female', '61bd060b07bddfecccea56a82b850ecf', 1),
+(6, 'smith34', 'daniel', 'michael', 'Female', '7055b3d9f5cb2829c26cd7e0e601cde5', 1),
+(7, 'james84', 'sanders', 'paul', 'Female', 'b7f72d6eb92b45458020748c8d1a3573', 1),
+(8, 'daniel53', 'mark', 'mike', 'Male', '299cbf7171ad1b2967408ed200b4e26c', 1),
+(9, 'brooks80', 'morgan', 'maria', 'Female', 'aa736a35dc15934d67c0a999dccff8f6', 1),
+(10, 'morgan65', 'paul', 'miller', 'Female', 'a28dca31f5aa5792e1cefd1dfd098569', 1);
+
+
+
+docker build -t utmdb:v1 .
+
+docker run utmdb:v1 
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+docker ps 
+
+docker inspect id | jq '.[].NetworkSettings.IPAddress'
+
+mysql --host=ip --user=db_username --password=db_pw -P 3306 db_name
+
+SHOW TABLES; 
+
+SELECT * FROM user_details limit 4;
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+WORDPRESS 
+
+touch docker-compose.yml
+    mkdir -p nginx/
+    mkdir -p db-data/
+    mkdir -p logs/nginx/
+    mkdir -p wordpress/
+
+
+vim nginx/wordpress.conf
+
+
+server {
+    listen 80;
+    server_name wp-hakase.co;
+ 
+    root /var/www/html;
+    index index.php;
+ 
+    access_log /var/log/nginx/hakase-access.log;
+    error_log /var/log/nginx/hakase-error.log;
+ 
+    location / {
+        try_files $uri $uri/ /index.php?$args;
+    }
+ 
+    location ~ \.php$ {
+        try_files $uri =404;
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_pass wordpress:9000;
+        fastcgi_index index.php;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param PATH_INFO $fastcgi_path_info;
+    }
+}
+
+
+vim docker-compose.yml
+
+
+nginx:
+    image: nginx:latest
+    ports:
+        - '8080:80'
+    volumes:
+        - ./nginx:/etc/nginx/conf.d
+        - ./logs/nginx:/var/log/nginx
+        - ./wordpress:/var/www/html
+    links:
+        - wordpress
+    restart: always
+mysql:
+    image: mariadb
+    ports:
+        - '3307:3306'
+    volumes:
+        - ./db-data:/var/lib/mysql
+    environment:
+        - MYSQL_ROOT_PASSWORD=aqwe123
+    restart: always
+wordpress:
+    image: wordpress:4.7.1-php7.0-fpm
+    ports:
+        - '9000:9000'
+    volumes:
+        - ./wordpress:/var/www/html
+    environment:
+        - WORDPRESS_DB_NAME=wpdb
+        - WORDPRESS_TABLE_PREFIX=wp_
+        - WORDPRESS_DB_HOST=mysql
+        - WORDPRESS_DB_PASSWORD=aqwe123
+    links:
+        - mysql
+    restart: always
+
+
+:::::::::::::::::::::::::::::::::::::..
+
+INSTALL docker-compose 
+https://docs.docker.com/compose/install/
+
+sudo curl -L "https://github.com/docker/compose/releases/download/1.27.3/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+
+sudo chmod +x /usr/local/bin/docker-compose
+
+docker-compose --version
+
+
+docker-compose up 
+
+
+http://localhost:8080/
+
+docker-compose down 
+
+sudo rm -rf db-data
+
+
 
 
 
