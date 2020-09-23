@@ -331,6 +331,10 @@ wordpress:
     links:
         - mysql
     restart: always
+    
+ para subir es git ad .
+ luego git commit -m "nombre que quieras"
+ luego git push origin master
 
 
 :::::::::::::::::::::::::::::::::::::..
@@ -347,14 +351,17 @@ sudo chmod +x /usr/local/bin/docker-compose
 
 docker-compose --version
 
-
+activamos
 docker-compose up 
 
-
+comprobmos
 http://localhost:8080/
+
+desactivamos
 
 docker-compose down 
 
+para borrar (no tan necesario)
 sudo rm -rf db-data
 
 
@@ -362,6 +369,10 @@ ANTES DE SUBIR
 
 sudo chmod-R 777 04 es para dar permisos completos
 
+luego git ad .
+luego git commit -m "dsda"
+luego git push origin master
 
 
+podemos estar en la princpial con ls ver cuales queremos subir y subir desde ahi
 
