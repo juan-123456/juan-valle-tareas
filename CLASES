@@ -1,15 +1,65 @@
-FROM node:10.15.0
 
-WORKDIR /usr/src/app
+Dia 17 de septiebre codigos
 
-COPY package*.json ./
+https://runkit.com/5f63e259f0adf0001aab2b0e/5f6ab31ad14b7f001a5a1d50
+https://runkit.com/juan-123456/5f6ab39bbf8b400014736806
 
-RUN npm install
+const IPFS = require("ipfs-mini");
+const ipfs = new IPFS({host: 'ipfs.infura.io', port:5001, protocol:'https'});
+const data = "Data in the interplanetary file system IPFS";
+ipfs.add(data, (err,hash)=> {
+    if(err){
+    return console.log(err);
+    }
+    console.log('https://ipfs.infura.io/ipfs/'+hash)
+})
+Nos genera este codigo cuando ejercutamos este código de arriba
+https://ipfs.infura.io/ipfs/QmNNGntDAAdChxajoV1QRhV3DaRxCgQL2GSg6smGJjbgKa
 
-COPY . .
+const prompt = require('prompt');
+const IPFS = require("ipfs-mini");
+const ipfs = new IPFS({host: 'ipfs.infura.io', port:5001, protocol:'https'});
+prompt.start();
+prompt.get(['ipfs'], function (err, result) {
+console.log('Command-line input received:');
+console.log('  IPS: ' + result.ipfs);
 
-CMD [ "npm", "start" ]
--------------------------------
+
+ipfs.add(result.ipfs, (err,hash)=> {
+   if(err){
+   return console.log(err);
+   }
+   console.log('https://ipfs.infura.io/ipfs/'+hash)
+})
+});
+Lo que hacemos es una constante en ibpf le agregamos un dato para que me genere un  hash y pueda acceder a esa informacion
+ 
+
+
+Construir imagen 1 parte
+Nos vamos a la terminal
+Creamos un vi index.js y pegamos
+const prompt = require('prompt');
+const IPFS = require("ipfs-mini");
+const ipfs = new IPFS({host: 'ipfs.infura.io', port:5001, protocol:'https'});
+prompt.start();
+prompt.get(['ipfs'], function (err, result) {
+console.log('Command-line input received:');
+console.log('  IPS: ' + result.ipfs);
+
+
+ipfs.add(result.ipfs, (err,hash)=> {
+   if(err){
+   return console.log(err);
+   }
+   console.log('https://ipfs.infura.io/ipfs/'+hash)
+})
+});
+
+Luego cat index para ver
+Luego touch package.json Dockerfile
+ 
+Luego vi package,json y pegamos
 {
  "name": "ipfs",
  "version": "1.0.0",
@@ -32,25 +82,25 @@ CMD [ "npm", "start" ]
    "prompt": "^1.0.0"
  }
 }
----------------------
-
-const prompt = require('prompt');
-const IPFS = require("ipfs-mini");
-const ipfs = new IPFS({host: 'ipfs.infura.io', port:5001, protocol:'https'});
-prompt.start();
-prompt.get(['ipfs'], function (err, result) {
-console.log('Command-line input received:');
-console.log('  IPS: ' + result.ipfs);
-
-
-ipfs.add(result.ipfs, (err,hash)=> {
-   if(err){
-   return console.log(err);
-   }
-   console.log('https://ipfs.infura.io/ipfs/'+hash)
-})
-});
-
-----------}
-
+Luego vi Docker file y pegamos
+FROM node:10.15.0
+WORKDIR /usr/src/app
+COPY package*.json ./
+RUN npm install
+COPY . .
+CMD [ "npm", "start" ]
+Estamos jalando la imagen e importamos package 
+Tendríamos esto ahora
+ 
+ 
+Ya construimos 
+Ahora corremos
+1 contruimos imagen 
 docker build -t ipfs:v1 .
+luego probar nuestra imagen
+docker run --rm -it --name=ipfs ipfs:v1
+aparece el link
+y a si creamos nuestra primera imagen
+
+
+
