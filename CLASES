@@ -338,6 +338,8 @@ wordpress:
 INSTALL docker-compose 
 https://docs.docker.com/compose/install/
 
+git apt install curl
+
 sudo curl -L "https://github.com/docker/compose/releases/download/1.27.3/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 
 
@@ -355,6 +357,10 @@ docker-compose down
 
 sudo rm -rf db-data
 
+
+ANTES DE SUBIR
+
+sudo chmod-R 777 04 es para dar permisos completos
 
 
 
