@@ -1,0 +1,11 @@
+A finales de los 1900 y principios de los 2000, se crearon buscadores e índices para ayudar a localizar información relevante dentro de contenido basado en texto. 
+Docenas a millones de páginas se requirió de la automatización. Se crearon los rastreadores Web y entonces se iniciaron las primeras compañías de buscadores Yahoo, AltaVista, etc.
+En el año 2006 los dos componentes que formaban parte de Hadoop: MapReduce y HDFS se cedieron a la Apache Software Foundation como proyecto open source
+El proyecto fue desarrollado en el lenguaje de programación Java.
+La versión 1.0 de Hadoop fue publicada en el año 2012. La versión 2.0 se publicó en el año 2013 añadiendo Yarn como gestor de recursos y desacoplando HDFS de MapReduce. 
+En el año 2017 se publicó Hadoop 3.0 añadiendo mejoras.
+Hadoop es un framework opensource para almacenar datos y ejecutar aplicaciones en clusters de hardware básicos.
+Capacidad para almacenar y procesar grandes cantidades de cualquier tipo de datos rápidamente. 
+Poder de procesamiento. El modelo de computación distribuida de Hadoop procesa rápidamente Big Data.
+Inspirándose en la computación en paralelo de Google, los programadores Mike Cafarella y Doug Cutting lanzaron la primera versión de Hadoop el 1 de abril de 2006. Se trata de una solución de código abierto que emplea la computación en paralelo para procesar y analizar volúmenes enormes de data. 
+Cutting inició la investigación mientras trabajaba en Google, y la continuó al marcharse a Yahoo. Entonces se enmarcó en el proyecto de desarrollo de Nutch, motor de búsqueda de esta última compañía, este proyecto tenia problemas de escalabilidad, leyó el paper de Google y lo implemento, dando lugar a Hadoop y HDFS como proyectos de Apache.
